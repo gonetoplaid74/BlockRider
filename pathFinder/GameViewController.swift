@@ -76,7 +76,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         setupGameScreenLabelsAndButtons()
         self.createNewScene()
         scene.physicsWorld.contactDelegate = self
-        print(kidsModeOn)
+        
     }
  
   
@@ -153,7 +153,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
             
             let scoreDefault = UserDefaults.standard
             scoreDefault.set(highscore, forKey: "highscore")
-            print(highscore)
+            
             
         }
         
@@ -756,7 +756,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
      }
      
      else{
-     print("logged in")
+     
      }
      
      
