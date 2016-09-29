@@ -15,8 +15,10 @@
 		166F97151D4E0DDA003DE668 /* pathFinderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166F97141D4E0DDA003DE668 /* pathFinderUITests.swift */; };
 		166F97231D4E0EF4003DE668 /* coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 166F97221D4E0EF4003DE668 /* coin.wav */; };
 		166F97251D4E0F03003DE668 /* Coin.dae in Resources */ = {isa = PBXBuildFile; fileRef = 166F97241D4E0F03003DE668 /* Coin.dae */; };
+		B842D680C906E281DC3ED726 /* Pods_pathFinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 568DB28C4B4948EE59264384 /* Pods_pathFinder.framework */; };
 		C205FBEC1D95519100B5E259 /* TitleScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C205FBEB1D95519100B5E259 /* TitleScreenVC.swift */; };
 		C205FBEE1D9551AF00B5E259 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C205FBED1D9551AF00B5E259 /* SettingsVC.swift */; };
+		C2106E191D9D46A7007E45CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C2106E181D9D46A7007E45CE /* GoogleService-Info.plist */; };
 		C217EEB81D90FCF4007775B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C217EEB71D90FCF4007775B9 /* Main.storyboard */; };
 		C217EEBA1D910137007775B9 /* GameOverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C217EEB91D910137007775B9 /* GameOverVC.swift */; };
 		C2B6E27F1D941D2F00EC0A2C /* coins.wav in Resources */ = {isa = PBXBuildFile; fileRef = C2B6E27E1D941D2F00EC0A2C /* coins.wav */; };
@@ -57,8 +59,12 @@
 		166F97161D4E0DDA003DE668 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		166F97221D4E0EF4003DE668 /* coin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin.wav; sourceTree = "<group>"; };
 		166F97241D4E0F03003DE668 /* Coin.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = Coin.dae; sourceTree = "<group>"; };
+		46EC3E40E823C5258659D8D9 /* Pods-pathFinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pathFinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pathFinder/Pods-pathFinder.debug.xcconfig"; sourceTree = "<group>"; };
+		568DB28C4B4948EE59264384 /* Pods_pathFinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pathFinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF5502071667DC6E2D1D444A /* Pods-pathFinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pathFinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-pathFinder/Pods-pathFinder.release.xcconfig"; sourceTree = "<group>"; };
 		C205FBEB1D95519100B5E259 /* TitleScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleScreenVC.swift; sourceTree = "<group>"; };
 		C205FBED1D9551AF00B5E259 /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		C2106E181D9D46A7007E45CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C217EEB71D90FCF4007775B9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C217EEB91D910137007775B9 /* GameOverVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverVC.swift; sourceTree = "<group>"; };
 		C2B6E27E1D941D2F00EC0A2C /* coins.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coins.wav; sourceTree = "<group>"; };
@@ -72,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B842D680C906E281DC3ED726 /* Pods_pathFinder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +106,8 @@
 				166F97081D4E0DDA003DE668 /* pathFinderTests */,
 				166F97131D4E0DDA003DE668 /* pathFinderUITests */,
 				166F96F01D4E0DDA003DE668 /* Products */,
+				D804408756BF2622DFF6AF1A /* Pods */,
+				4A6376918C3ED3B7F1C5A75A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -115,6 +124,7 @@
 		166F96F11D4E0DDA003DE668 /* pathFinder */ = {
 			isa = PBXGroup;
 			children = (
+				C2106E181D9D46A7007E45CE /* GoogleService-Info.plist */,
 				166F96F21D4E0DDA003DE668 /* AppDelegate.swift */,
 				166F97241D4E0F03003DE668 /* Coin.dae */,
 				C2B6E27E1D941D2F00EC0A2C /* coins.wav */,
@@ -152,6 +162,23 @@
 			path = pathFinderUITests;
 			sourceTree = "<group>";
 		};
+		4A6376918C3ED3B7F1C5A75A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				568DB28C4B4948EE59264384 /* Pods_pathFinder.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D804408756BF2622DFF6AF1A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				46EC3E40E823C5258659D8D9 /* Pods-pathFinder.debug.xcconfig */,
+				BF5502071667DC6E2D1D444A /* Pods-pathFinder.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -159,9 +186,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 166F97191D4E0DDA003DE668 /* Build configuration list for PBXNativeTarget "pathFinder" */;
 			buildPhases = (
+				7A4461F1A83B31A705A0EF7A /* [CP] Check Pods Manifest.lock */,
 				166F96EB1D4E0DDA003DE668 /* Sources */,
 				166F96EC1D4E0DDA003DE668 /* Frameworks */,
 				166F96ED1D4E0DDA003DE668 /* Resources */,
+				628F5844328785B268A3EA8A /* [CP] Embed Pods Frameworks */,
+				B4C301C500F59BAF37D184EC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -261,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				166F97231D4E0EF4003DE668 /* coin.wav in Resources */,
+				C2106E191D9D46A7007E45CE /* GoogleService-Info.plist in Resources */,
 				166F97251D4E0F03003DE668 /* Coin.dae in Resources */,
 				C217EEB81D90FCF4007775B9 /* Main.storyboard in Resources */,
 				C2B6E27F1D941D2F00EC0A2C /* coins.wav in Resources */,
@@ -285,6 +316,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		628F5844328785B268A3EA8A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pathFinder/Pods-pathFinder-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7A4461F1A83B31A705A0EF7A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B4C301C500F59BAF37D184EC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pathFinder/Pods-pathFinder-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		166F96EB1D4E0DDA003DE668 /* Sources */ = {
@@ -436,6 +515,7 @@
 		};
 		166F971A1D4E0DDA003DE668 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46EC3E40E823C5258659D8D9 /* Pods-pathFinder.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -451,6 +531,7 @@
 		};
 		166F971B1D4E0DDA003DE668 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF5502071667DC6E2D1D444A /* Pods-pathFinder.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

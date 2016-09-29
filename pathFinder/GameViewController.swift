@@ -12,6 +12,8 @@ import SceneKit
 import SpriteKit
 import GameKit
 import AVFoundation
+import Firebase
+import GoogleMobileAds
 
 struct bodyNames {
     static let Person = 0x1 << 1
@@ -64,6 +66,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
     var startingSpeed = Int()
     var colourSchemeColour = UIColor()
     var kidsModeOn = String()
+    var adView: GADBannerView!
     
     
     
@@ -125,12 +128,16 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
             highscoreLabel.isHidden = true
             livesLbl.isHidden = true
             newGameButton.isHidden = false
+            adView.isHidden = false
             
         } else {
             gameOverLabel.isHidden = true
             scoreLabel.text = "Score : \(score)"
             highscoreLabel.text = "Highscore : \(highscore)"
             livesLbl.text = "Lives : \(lives)"
+            if dead == true {
+                adView.isHidden = false
+            }
 
         }
         
@@ -206,6 +213,15 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
     
     func setupGameScreenLabelsAndButtons () {
         
+        adView = GADBannerView(frame: CGRect(origin: CGPoint(x: (self.view.frame.width / 2) - 160, y: self.view.frame.height / 2 + (self.view.frame.height / 2) - 50), size: CGSize(width: 320, height: 50)))
+        //adView.adUnitID = "ca-app-pub-6474009264275372/5132767841"
+        adView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        adView.rootViewController = self
+        adView.load(GADRequest())
+        self.view.addSubview(adView)
+        
+        
+        
         scoreLabel = UILabel(frame: CGRect(origin: CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height / 2 + self.view.frame.height / 2.5), size: CGSize(width: self.view.frame.width, height: 100)))
         
         scoreLabel.center = CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height / 2 - self.view.frame.height / 2.5)
@@ -224,9 +240,9 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         self.view.addSubview(livesLbl)
         
         
-        highscoreLabel = UILabel(frame: CGRect(origin: CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height / 2 + self.view.frame.height / 2.5), size: CGSize(width: self.view.frame.width, height: 100)))
+        highscoreLabel = UILabel(frame: CGRect(origin: CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height / 2 + self.view.frame.height / 2.8), size: CGSize(width: self.view.frame.width, height: 100)))
         
-        highscoreLabel.center = CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height / 2 + self.view.frame.height / 2.5)
+        highscoreLabel.center = CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height / 2 + self.view.frame.height / 2.8)
         highscoreLabel.textAlignment = .center
         highscoreLabel.textColor = UIColor.darkGray
         highscoreLabel.font = UIFont.systemFont(ofSize: 22)
@@ -366,6 +382,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         
         let wait = SCNAction.wait(duration: 0.75)
         loseLife()
+    
         
         
        if lives != 0{
@@ -585,18 +602,22 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        
         if dead == false{
             self.performSelector(onMainThread: #selector(GameViewController.updateLabel), with: nil, waitUntilDone: false)
             if goingLeft == false{
                 person.removeAllActions()
                 person.runAction(SCNAction.repeatForever(SCNAction.move(by: SCNVector3Make(Float(speed), 0, 0), duration: 20)))
                 goingLeft = true
+                adView.isHidden = true
                 
             }
             else {
                 person.removeAllActions()
                 person.runAction(SCNAction.repeatForever(SCNAction.move(by: SCNVector3Make(0, 0, Float(speed)), duration: 20)))
                 goingLeft = false
+                adView.isHidden = true
             }
         }
     }
@@ -671,6 +692,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         let sceneView = self.view as! SCNView
         sceneView.delegate = self
         sceneView.scene = scene
+
         setup()
     }
     
