@@ -212,12 +212,22 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
     }
     
     func setupGameScreenLabelsAndButtons () {
-        
+        let request = GADRequest()
         adView = GADBannerView(frame: CGRect(origin: CGPoint(x: (self.view.frame.width / 2) - 160, y: self.view.frame.height / 2 + (self.view.frame.height / 2) - 50), size: CGSize(width: 320, height: 50)))
-        //adView.adUnitID = "ca-app-pub-6474009264275372/5132767841"
-        adView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        
+        // live add unitID
+        adView.adUnitID = "ca-app-pub-6474009264275372/5132767841"
+       
+        //test add unitID
+        //adView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        
         adView.rootViewController = self
-        adView.load(GADRequest())
+        
+        if kidsModeOn == "on" {
+        request.tag(forChildDirectedTreatment: true)
+        } else  { request.tag(forChildDirectedTreatment: false)
+        }
+        adView.load(request)
         self.view.addSubview(adView)
         
         
