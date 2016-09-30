@@ -215,11 +215,26 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         let request = GADRequest()
         adView = GADBannerView(frame: CGRect(origin: CGPoint(x: (self.view.frame.width / 2) - 160, y: self.view.frame.height / 2 + (self.view.frame.height / 2) - 50), size: CGSize(width: 320, height: 50)))
         
+        if colourScheme == "blue" {
+            
+        
         // live add unitID
         adView.adUnitID = "ca-app-pub-6474009264275372/5132767841"
-       
+        } else if colourScheme == "pink" {
+            
+        //pink add UnitID
+            //adView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        adView.adUnitID = "ca-app-pub-6474009264275372/5940019843"
+        } else if colourScheme == "random" {
+        
+        //Random add UniID
+            //adView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        adView.adUnitID = "ca-app-pub-6474009264275372/7416753049"
+            
+        }
         //test add unitID
         //adView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+
         
         adView.rootViewController = self
         
@@ -800,6 +815,8 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
      func saveHighscore(score : Int){
      
      if GKLocalPlayer.localPlayer().isAuthenticated {
+        
+        if kidsModeOn == "off" {
      
      let scoreReporter = GKScore(leaderboardIdentifier: "BR001LB")
      
@@ -809,6 +826,18 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
      let scoreArray : [GKScore] = [scoreReporter]
      
      GKScore.report(scoreArray, withCompletionHandler: nil)
+            
+        } else if kidsModeOn == "on" {
+            let scoreReporter = GKScore(leaderboardIdentifier: "BRKLB001")
+            
+            scoreReporter.value = Int64(score)
+            
+            
+            let scoreArray : [GKScore] = [scoreReporter]
+            
+            GKScore.report(scoreArray, withCompletionHandler: nil)
+            
+        }
     
      
      }
