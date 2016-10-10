@@ -767,7 +767,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         
         //Create Box
         newBox()
-        let firstBoxGeo = SCNBox(width: 1, height: 1, length: 1, chamferRadius: 0.1)
+        let firstBoxGeo = SCNBox(width: 1, height: 1.5, length: 1, chamferRadius: 0.1)
         firstBox.geometry = firstBoxGeo
         firstBoxGeo.materials = [boxMaterial]
         firstBox.position = SCNVector3Make(0, 0, 0)
