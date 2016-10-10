@@ -67,6 +67,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
     var colourSchemeColour = UIColor()
     var kidsModeOn = String()
     var adView: GADBannerView!
+    var newHighScore = Bool()
     
     
     
@@ -388,14 +389,14 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
             }
             
             if person.position.x > currentBox!.position.x - 0.55 && person.position.x < currentBox!.position.x + 0.55 || person.position.z > currentBox!.position.z - 0.55 && person.position.z < currentBox!.position.z + 0.55 {
-                
+              dead = false
                 
                 
             }
             else{
-                
-                die()
                 dead = true
+                die()
+                
             }
             
         }
@@ -511,6 +512,8 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
                 highScore4 = highScore5
                 highScore5 = temp
                 temp = 0
+                
+                
             }
             
             if  highScore4 > highScore3 {
@@ -518,6 +521,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
                 highScore3 = highScore4
                 highScore4 = temp
                 temp = 0
+                
             }
             
             if  highScore3 > highScore2 {
@@ -532,6 +536,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
                 highscore = highScore2
                 highScore2 = temp
                 temp = 0
+                newHighScore = true
                 
             }
             
@@ -684,6 +689,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         prevBoxNumber = 0
         firstOne = true
         dead = false
+        newHighScore = false
         
         if kidsModeOn == "off"{
             
@@ -761,7 +767,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         
         //Create Box
         newBox()
-        let firstBoxGeo = SCNBox(width: 1, height: 1.5, length: 1, chamferRadius: 0.1)
+        let firstBoxGeo = SCNBox(width: 1, height: 1, length: 1, chamferRadius: 0.1)
         firstBox.geometry = firstBoxGeo
         firstBoxGeo.materials = [boxMaterial]
         firstBox.position = SCNVector3Make(0, 0, 0)
@@ -815,6 +821,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
      func saveHighscore(score : Int){
      
      if GKLocalPlayer.localPlayer().isAuthenticated {
+        if newHighScore == true {
         
         if kidsModeOn == "off" {
      
@@ -840,10 +847,12 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         }
     
      
-     }
+        }
+        newHighScore = false
      
-     }
-     
+        }
+    }
+    
      func showLeaderboard(){
      saveHighscore(score: highscore)
      
