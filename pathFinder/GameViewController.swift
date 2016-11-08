@@ -67,6 +67,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
     var colourSchemeColour = UIColor()
     var kidsModeOn = String()
     var adView: GADBannerView!
+    
     var newHighScore = Bool()
     
     
@@ -78,11 +79,14 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         authenticatePlayer()
         baseColourScheme()
         setupGameScreenLabelsAndButtons()
+        
         self.createNewScene()
         scene.physicsWorld.contactDelegate = self
         
+        
     }
  
+   
   
     
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
@@ -212,7 +216,11 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         
     }
     
+  
+    
     func setupGameScreenLabelsAndButtons () {
+        
+        
         let request = GADRequest()
         adView = GADBannerView(frame: CGRect(origin: CGPoint(x: (self.view.frame.width / 2) - 160, y: self.view.frame.height / 2 + (self.view.frame.height / 2) - 50), size: CGSize(width: 320, height: 50)))
         
@@ -388,14 +396,15 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
                 
             }
             
-            if person.position.x > currentBox!.position.x - 0.55 && person.position.x < currentBox!.position.x + 0.55 || person.position.z > currentBox!.position.z - 0.55 && person.position.z < currentBox!.position.z + 0.55 {
+            if person.position.x > currentBox!.position.x - 0.52 && person.position.x < currentBox!.position.x + 0.52 || person.position.z > currentBox!.position.z - 0.52 && person.position.z < currentBox!.position.z + 0.52 {
               dead = false
                 
                 
             }
             else{
-                dead = true
                 die()
+                dead = true
+                
                 
             }
             
@@ -553,6 +562,8 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
     func gameOverFunc(){
         
      updatedScores()
+        
+               
         let wait = SCNAction.wait(duration: 0.75)
         let sequence = SCNAction.sequence([wait, SCNAction.run({
             node in
@@ -595,7 +606,16 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         boxNumber += 1
         tempBox.name = "\(boxNumber)"
         counter += 1
-        if counter == 25 {
+        if counter == 5 {
+            addScore()
+        } else if counter == 10 {
+            addScore()
+        } else if counter == 15 {
+            addScore()
+        } else if counter == 20 {
+            addScore()
+        }
+        else if counter == 25 {
             speed -= 1
             addScore()
             counter = 0
@@ -767,7 +787,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         
         //Create Box
         newBox()
-        let firstBoxGeo = SCNBox(width: 1, height: 1.5, length: 1, chamferRadius: 0.1)
+        let firstBoxGeo = SCNBox(width: 1.0, height: 1.5, length: 1.0, chamferRadius: 0.1)
         firstBox.geometry = firstBoxGeo
         firstBoxGeo.materials = [boxMaterial]
         firstBox.position = SCNVector3Make(0, 0, 0)

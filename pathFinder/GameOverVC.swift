@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import GoogleMobileAds
+import Firebase
 
-class GameOverVC: UIViewController{
+class GameOverVC: UIViewController, GADInterstitialDelegate {
 
     
     @IBOutlet weak var newGameBtn: UIButton!
@@ -23,6 +25,9 @@ class GameOverVC: UIViewController{
     var score = Int()
     var newScore = Int()
     var colourScheme = String()
+   var interstitial: GADInterstitial!
+    var kidsModeOn = String()
+    
     
     @IBOutlet weak var scoreView: UIView!
     @IBOutlet weak var Label1: UILabel!
@@ -31,14 +36,67 @@ class GameOverVC: UIViewController{
     @IBOutlet weak var Label4: UILabel!
     @IBOutlet weak var Label5: UILabel!
     @IBOutlet weak var messageLBL: UILabel!
-    @IBOutlet weak var bottomView: UIView!
+    //@IBOutlet weak var bottomView: UIView!
     
+    @IBOutlet weak var adView: GADBannerView!
     @IBOutlet weak var finalScoreLbl: UILabel!
     
     @IBOutlet weak var topView: UIView!
     override func viewDidLoad() {
         
+        adView.isHidden = false
         
+        
+       // createAndLoadInterstitial()
+        interstitial = createAndLoadInterstitial()
+         if interstitial.isReady {
+        interstitial.present(fromRootViewController: self)
+          } else {
+               print("Ad wasn't ready")
+          }
+
+        let kidsMode = UserDefaults.standard
+        if kidsMode.string(forKey: "kidsMode") == nil {
+            kidsModeOn = "off"
+        } else {
+            kidsModeOn = kidsMode.string(forKey: "kidsMode")!
+            
+        }
+
+        let request = GADRequest()
+        //adView = GADBannerView
+        
+//        if colourScheme == "blue" {
+//            
+//            
+//            // live add unitID
+//            adView.adUnitID = "ca-app-pub-6474009264275372/5132767841"
+//        } else if colourScheme == "pink" {
+//            
+//            //pink add UnitID
+//            //adView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+//            adView.adUnitID = "ca-app-pub-6474009264275372/5940019843"
+//        } else if colourScheme == "random" {
+//            
+//            //Random add UniID
+//            //adView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+//            adView.adUnitID = "ca-app-pub-6474009264275372/7416753049"
+//            
+//        }
+        //test add unitID
+        //adView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        adView.adUnitID = "ca-app-pub-6474009264275372/2467968649"
+        
+        
+        adView.rootViewController = self
+        
+        if kidsModeOn == "on" {
+            request.tag(forChildDirectedTreatment: true)
+        } else  { request.tag(forChildDirectedTreatment: false)
+        }
+        adView.load(request)
+        //self.view.addSubview(adView)
+
         
         scoreView.layer.cornerRadius = 12.0
         scoreView.layer.shadowRadius = 12.0
@@ -63,14 +121,14 @@ class GameOverVC: UIViewController{
         
         if colourScheme == "pink" {
             topView.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            bottomView.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
+           // bottomView.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
             newGameBtn.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
             scoreView.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
             messageLBL.textColor = UIColor(red: 0.5647, green: 0.7921, blue: 0.9765, alpha: 1.0)
             
         } else if colourScheme == "blue" {
             topView.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            bottomView.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
+          //  bottomView.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
             newGameBtn.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
             scoreView.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
             messageLBL.textColor = UIColor(red: 1.0, green: 0.502, blue: 0.051, alpha: 1.0 )
@@ -79,7 +137,7 @@ class GameOverVC: UIViewController{
             messageLBL.textColor = UIColor(red: 1.0, green: 0.502, blue: 0.051, alpha: 1.0 )
             topView.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
             newGameBtn.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0)
-            bottomView.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
+       //     bottomView.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
             
         }
         
@@ -209,8 +267,41 @@ class GameOverVC: UIViewController{
         
     }
     
+    func createAndLoadInterstitial() -> GADInterstitial {
+        
+     interstitial = GADInterstitial(adUnitID: "ca-app-pub-6474009264275372/5882863841")
+        let request = GADRequest()
+        // Request test ads on devices you specify. Your test device ID is printed to the console when
+        // an ad request is made.
+        request.testDevices = [ kGADSimulatorID, "2077ef9a63d2b398840261c8221a0c9b" ]
+        interstitial.load(request)
+        print ("add loaded .......................")
+       // interstitial.present(fromRootViewController: self)
+        return interstitial
+    }
+    
+//    func createAndLoadInterstitial() -> GADInterstitial {
+//        interstitial = GADInterstitial(adUnitID: "ca-app-pub-6474009264275372/5882863841")
+//        let request = GADRequest()
+//        request.testDevices = [ kGADSimulatorID, "2077ef9a63d2b398840261c8221a0c9b" ]
+//        interstitial.delegate = self
+//        
+//        interstitial.load(GADRequest())
+//        
+//        print("ad loaded ................")
+//        return interstitial
+//    }
+//    
+//    func interstitialDidDismissScreen(ad: GADInterstitial!) {
+//        interstitial = createAndLoadInterstitial()
+//    }
+
+    
     
     @IBAction func NewGameBtnPressed(_ sender: AnyObject) {
+        
+        
+        
         self.performSegue(withIdentifier: "back", sender: nil)
         
     }

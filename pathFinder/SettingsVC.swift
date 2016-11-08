@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class SettingsVC: UIViewController {
 
@@ -30,11 +31,12 @@ class SettingsVC: UIViewController {
     var speed = Int()
     var colour = String()
     var colourScheme = String()
+    var ad = GADBannerView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+       
         
         let colourSchemeChoice = UserDefaults.standard
         let diffChosen = UserDefaults.standard
