@@ -97,7 +97,9 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
             
             
             nodeA.removeFromParentNode()
+            for _ in 0...5 {
             addScore()
+            }
            // coinSound.play()
             
             
@@ -112,7 +114,9 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
             
             
             nodeB.removeFromParentNode()
+            for _ in 0...5 {
             addScore()
+            }
             //coinSound.play()
             
         }
@@ -322,15 +326,15 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         let spin = SCNAction.rotate(by: CGFloat(M_PI * 2), around: SCNVector3Make(0, 0.5 , 0) , duration: 0.75)
         var coinFreq = UInt32()
         if startingSpeed == -60 {
-            coinFreq = 7
+            coinFreq = 9
         } else if startingSpeed == -80 {
-            coinFreq = 5
+            coinFreq = 6
         } else if startingSpeed == -110 {
             coinFreq = 3
         }
         
         let randomNumber = arc4random() % coinFreq
-        if randomNumber == 2{
+        if randomNumber == 1{
             let coinScene = SCNScene(named: "Coin.dae")
             let coin = coinScene?.rootNode.childNode(withName: "Coin", recursively: true)
             coin?.position = SCNVector3Make(box.position.x, box.position.y + 1, box.position.z)
@@ -606,16 +610,14 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         boxNumber += 1
         tempBox.name = "\(boxNumber)"
         counter += 1
-        if counter == 5 {
-            addScore()
-        } else if counter == 10 {
-            addScore()
-        } else if counter == 15 {
-            addScore()
-        } else if counter == 20 {
+        
+        if counter <= 23 && counter >= 1{
+        if counter % 2 == 0 {
             addScore()
         }
-        else if counter == 25 {
+        }
+        
+        if counter == 24 {
             speed -= 1
             addScore()
             counter = 0
@@ -716,7 +718,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         speed = startingSpeed
         } else { speed = startingSpeed / 2
         }
-        counter = 0
+        counter = -6
 
         self.view.backgroundColor = .white
         let sceneView = self.view as! SCNView
@@ -736,7 +738,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         firstOne = true
         dead = false
         speed += 2
-        counter = 0
+        counter = -6
         
         
         self.view.backgroundColor = .white

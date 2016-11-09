@@ -67,13 +67,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wjp-Tg-G2U">
                                 <rect key="frame" x="0.0" y="627" width="375" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKD-bu-vDM">
-                                        <rect key="frame" x="314" y="-2" width="61" height="42"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKD-bu-vDM">
+                                        <rect key="frame" x="332" y="3" width="35" height="35"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="61" id="YZd-gZ-0Cr"/>
-                                            <constraint firstAttribute="height" constant="42" id="w7j-6N-Ic8"/>
+                                            <constraint firstAttribute="width" constant="35" id="YZd-gZ-0Cr"/>
+                                            <constraint firstAttribute="height" constant="35" id="w7j-6N-Ic8"/>
                                         </constraints>
-                                        <state key="normal" image="settings"/>
+                                        <state key="normal" image="gears"/>
                                         <connections>
                                             <segue destination="jgj-kc-6Vk" kind="show" id="YwK-jF-tlq"/>
                                         </connections>
@@ -82,8 +82,8 @@
                                 <color key="backgroundColor" red="0.37647058820000001" green="0.49019607840000001" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="6aq-xK-f6C"/>
-                                    <constraint firstAttribute="bottom" secondItem="eKD-bu-vDM" secondAttribute="bottom" id="WJa-CY-2Wx"/>
-                                    <constraint firstAttribute="trailing" secondItem="eKD-bu-vDM" secondAttribute="trailing" id="rmO-Ma-bvB"/>
+                                    <constraint firstAttribute="bottom" secondItem="eKD-bu-vDM" secondAttribute="bottom" constant="2" id="WJa-CY-2Wx"/>
+                                    <constraint firstAttribute="trailing" secondItem="eKD-bu-vDM" secondAttribute="trailing" constant="8" id="rmO-Ma-bvB"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -577,14 +577,14 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsn-0h-aSd">
-                                        <rect key="frame" x="314" y="24" width="61" height="42"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsn-0h-aSd">
+                                        <rect key="frame" x="327" y="25" width="40" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="61" id="Caz-pq-g4e"/>
-                                            <constraint firstAttribute="height" constant="42" id="H38-mD-x6o"/>
+                                            <constraint firstAttribute="width" constant="40" id="Caz-pq-g4e"/>
+                                            <constraint firstAttribute="height" constant="40" id="H38-mD-x6o"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="33"/>
-                                        <state key="normal" image="settings"/>
+                                        <state key="normal" image="gears"/>
                                         <connections>
                                             <segue destination="jgj-kc-6Vk" kind="show" id="d9D-Ji-pzX"/>
                                         </connections>
@@ -592,9 +592,9 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.37647058820000001" green="0.49019607840000001" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="wsn-0h-aSd" secondAttribute="trailing" id="Dhh-nU-uN9"/>
+                                    <constraint firstAttribute="trailing" secondItem="wsn-0h-aSd" secondAttribute="trailing" constant="8" id="Dhh-nU-uN9"/>
                                     <constraint firstItem="i8Z-0M-gud" firstAttribute="top" secondItem="5q2-rR-Qzx" secondAttribute="top" constant="18" id="XjE-cb-48j"/>
-                                    <constraint firstItem="wsn-0h-aSd" firstAttribute="top" secondItem="5q2-rR-Qzx" secondAttribute="top" constant="24" id="Zsv-IH-Vl1"/>
+                                    <constraint firstItem="wsn-0h-aSd" firstAttribute="top" secondItem="5q2-rR-Qzx" secondAttribute="top" constant="25" id="Zsv-IH-Vl1"/>
                                     <constraint firstItem="i8Z-0M-gud" firstAttribute="leading" secondItem="5q2-rR-Qzx" secondAttribute="leading" constant="84" id="bJQ-Bd-bUJ"/>
                                     <constraint firstAttribute="height" constant="90" id="g6f-Xi-5my"/>
                                     <constraint firstItem="i8Z-0M-gud" firstAttribute="centerX" secondItem="5q2-rR-Qzx" secondAttribute="centerX" id="hZ7-1M-TZd"/>
@@ -650,7 +650,7 @@
     </scenes>
     <resources>
         <image name="BRtitle" width="716" height="784"/>
-        <image name="settings" width="15" height="15"/>
+        <image name="gears" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="OBg-xl-n91"/>

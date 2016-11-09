@@ -521,7 +521,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = MNM3C2L7P4;
 				INFOPLIST_FILE = pathFinder/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.uk.gonetoplaid.BlockRider;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -538,7 +538,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = MNM3C2L7P4;
 				INFOPLIST_FILE = pathFinder/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.uk.gonetoplaid.BlockRider;
 				PRODUCT_NAME = "$(TARGET_NAME)";

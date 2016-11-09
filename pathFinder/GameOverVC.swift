@@ -25,7 +25,7 @@ class GameOverVC: UIViewController, GADInterstitialDelegate {
     var score = Int()
     var newScore = Int()
     var colourScheme = String()
-   var interstitial: GADInterstitial!
+   //var interstitial: GADInterstitial!
     var kidsModeOn = String()
     
     
@@ -46,15 +46,7 @@ class GameOverVC: UIViewController, GADInterstitialDelegate {
         
         adView.isHidden = false
         
-        
-       // createAndLoadInterstitial()
-        interstitial = createAndLoadInterstitial()
-         if interstitial.isReady {
-        interstitial.present(fromRootViewController: self)
-          } else {
-               print("Ad wasn't ready")
-          }
-
+  
         let kidsMode = UserDefaults.standard
         if kidsMode.string(forKey: "kidsMode") == nil {
             kidsModeOn = "off"
@@ -64,7 +56,6 @@ class GameOverVC: UIViewController, GADInterstitialDelegate {
         }
 
         let request = GADRequest()
-        //adView = GADBannerView
         
 //        if colourScheme == "blue" {
 //            
@@ -95,7 +86,7 @@ class GameOverVC: UIViewController, GADInterstitialDelegate {
         } else  { request.tag(forChildDirectedTreatment: false)
         }
         adView.load(request)
-        //self.view.addSubview(adView)
+       
 
         
         scoreView.layer.cornerRadius = 12.0
@@ -266,37 +257,6 @@ class GameOverVC: UIViewController, GADInterstitialDelegate {
         
         
     }
-    
-    func createAndLoadInterstitial() -> GADInterstitial {
-        
-     interstitial = GADInterstitial(adUnitID: "ca-app-pub-6474009264275372/5882863841")
-        let request = GADRequest()
-        // Request test ads on devices you specify. Your test device ID is printed to the console when
-        // an ad request is made.
-        request.testDevices = [ kGADSimulatorID, "2077ef9a63d2b398840261c8221a0c9b" ]
-        interstitial.load(request)
-        print ("add loaded .......................")
-       // interstitial.present(fromRootViewController: self)
-        return interstitial
-    }
-    
-//    func createAndLoadInterstitial() -> GADInterstitial {
-//        interstitial = GADInterstitial(adUnitID: "ca-app-pub-6474009264275372/5882863841")
-//        let request = GADRequest()
-//        request.testDevices = [ kGADSimulatorID, "2077ef9a63d2b398840261c8221a0c9b" ]
-//        interstitial.delegate = self
-//        
-//        interstitial.load(GADRequest())
-//        
-//        print("ad loaded ................")
-//        return interstitial
-//    }
-//    
-//    func interstitialDidDismissScreen(ad: GADInterstitial!) {
-//        interstitial = createAndLoadInterstitial()
-//    }
-
-    
     
     @IBAction func NewGameBtnPressed(_ sender: AnyObject) {
         
