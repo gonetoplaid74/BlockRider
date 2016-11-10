@@ -64,11 +64,12 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
     var temp2 = Int()
     var colourScheme = String()
     var startingSpeed = Int()
+    var speedName = String()
     var colourSchemeColour = UIColor()
     var kidsModeOn = String()
     var adView: GADBannerView!
     
-    var newHighScore = Bool()
+    var newHighScore = false
     
     
     
@@ -79,6 +80,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         authenticatePlayer()
         baseColourScheme()
         setupGameScreenLabelsAndButtons()
+        setSpeed()
         
         self.createNewScene()
         scene.physicsWorld.contactDelegate = self
@@ -167,10 +169,6 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
             
             highscore = score
             
-            let scoreDefault = UserDefaults.standard
-            scoreDefault.set(highscore, forKey: "highscore")
-            
-            
         }
         
     }
@@ -180,10 +178,10 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         let savedColourScheme = UserDefaults.standard
         let kidsMode = UserDefaults.standard
         
-        if savedStartSpeed.integer(forKey: "startingSpeed") == 0 {
-            startingSpeed = -60
+        if savedStartSpeed.string(forKey: "startingSpeed") != nil {
+            speedName = savedStartSpeed.string(forKey: "startingSpeed")!
         } else {
-            startingSpeed = savedStartSpeed.integer(forKey: "startingSpeed")
+            speedName = "Slow"
         }
         
         if savedColourScheme.string(forKey: "chosenColourScheme") == nil {
@@ -207,14 +205,14 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
     func baseColourScheme(){
         
         if colourScheme == "pink" {
-            colourSchemeColour = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
+            colourSchemeColour = PINK_COLOR
             personColor = UIColor(red: 0.5647, green: 0.7921, blue: 0.9765, alpha: 1.0)
         } else if colourScheme == "blue" {
-            colourSchemeColour = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
+            colourSchemeColour = BLUE_COLOR
             personColor = UIColor(red: 1.0, green: 0.502, blue: 0.051, alpha: 1.0 )
 
         } else if colourScheme == "random" {
-            colourSchemeColour = UIColor(red: 1.0, green: 0.502, blue: 0.051, alpha: 1.0 )
+            colourSchemeColour = RANDOM_COLOR
             personColor = UIColor(red: 1.0, green: 0.502, blue: 0.5, alpha: 1.0 )
         }
         
@@ -325,11 +323,11 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         scene.physicsWorld.gravity = SCNVector3Make(0, 0, 0)
         let spin = SCNAction.rotate(by: CGFloat(M_PI * 2), around: SCNVector3Make(0, 0.5 , 0) , duration: 0.75)
         var coinFreq = UInt32()
-        if startingSpeed == -60 {
-            coinFreq = 9
-        } else if startingSpeed == -80 {
+        if speedName == "Slow" {
+            coinFreq = 10
+        } else if speedName == "Hyper-Active" {
             coinFreq = 6
-        } else if startingSpeed == -110 {
+        } else if speedName == "Ludicrous" {
             coinFreq = 3
         }
         
@@ -469,6 +467,10 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
             let savedHighScore6 = UserDefaults.standard
             let finalScore = UserDefaults.standard
             
+            if score > highscore {
+                newHighScore = true
+                print("......... new high score = true")
+            }
             
             if savedHighScore2.integer(forKey: "savedHighScore2") != 0{
                 
@@ -549,7 +551,8 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
                 highscore = highScore2
                 highScore2 = temp
                 temp = 0
-                newHighScore = true
+                
+                
                 
             }
             
@@ -564,9 +567,11 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
 
     
     func gameOverFunc(){
+             updatedScores()
+        let scoreDefault = UserDefaults.standard
+        scoreDefault.set(highscore, forKey: "highscore")
         
-     updatedScores()
-        
+               
                
         let wait = SCNAction.wait(duration: 0.75)
         let sequence = SCNAction.sequence([wait, SCNAction.run({
@@ -611,13 +616,14 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         tempBox.name = "\(boxNumber)"
         counter += 1
         
-        if counter <= 23 && counter >= 1{
-        if counter % 2 == 0 {
+        if speedName == "Ludicrous" && counter <= 25 && counter >= 1 && counter % 2 == 0{
             addScore()
+        } else if speedName == "Hyper-Active" && counter <= 25 && counter >= 1 && counter % 3 == 0{
+            addScore()
+        } else if speedName == "Slow" && counter <= 25 && counter >= 1 && counter % 5 == 0 {
+        addScore()
         }
-        }
-        
-        if counter == 24 {
+        if counter == 25 {
             speed -= 1
             addScore()
             counter = 0
@@ -674,7 +680,16 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         }
     }
     
-    
+    func setSpeed() {
+        if speedName == "Slow" {
+            startingSpeed = -60
+        } else if speedName == "Hyper-Active" {
+            startingSpeed = -85
+        } else if speedName == "Ludicrous" {
+            startingSpeed = -105
+        }
+        
+    }
     
     func newBox(){
         
@@ -711,7 +726,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         prevBoxNumber = 0
         firstOne = true
         dead = false
-        newHighScore = false
+        
         
         if kidsModeOn == "off"{
             
@@ -843,18 +858,18 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
      func saveHighscore(score : Int){
      
      if GKLocalPlayer.localPlayer().isAuthenticated {
-        if newHighScore == true {
-        
         if kidsModeOn == "off" {
      
      let scoreReporter = GKScore(leaderboardIdentifier: "BR001LB")
      
      scoreReporter.value = Int64(score)
-     
+     print(".........\(score)")
      
      let scoreArray : [GKScore] = [scoreReporter]
      
      GKScore.report(scoreArray, withCompletionHandler: nil)
+            
+            print ("scoreArray............ \([scoreArray])")
             
         } else if kidsModeOn == "on" {
             let scoreReporter = GKScore(leaderboardIdentifier: "BRKLB001")
@@ -868,15 +883,15 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
             
         }
     
-     
-        }
-        newHighScore = false
-     
+       
+        
         }
     }
     
      func showLeaderboard(){
+      
      saveHighscore(score: highscore)
+       
      
      let gc = GKGameCenterViewController()
      
@@ -889,6 +904,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
      
      func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
      gameCenterViewController.dismiss(animated: true, completion: nil)
+        
      }
      
      

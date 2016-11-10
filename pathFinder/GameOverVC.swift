@@ -40,6 +40,7 @@ class GameOverVC: UIViewController, GADInterstitialDelegate {
     
     @IBOutlet weak var adView: GADBannerView!
     @IBOutlet weak var finalScoreLbl: UILabel!
+    var mainColor = UIColor()
     
     @IBOutlet weak var topView: UIView!
     override func viewDidLoad() {
@@ -56,31 +57,9 @@ class GameOverVC: UIViewController, GADInterstitialDelegate {
         }
 
         let request = GADRequest()
-        
-//        if colourScheme == "blue" {
-//            
-//            
-//            // live add unitID
-//            adView.adUnitID = "ca-app-pub-6474009264275372/5132767841"
-//        } else if colourScheme == "pink" {
-//            
-//            //pink add UnitID
-//            //adView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-//            adView.adUnitID = "ca-app-pub-6474009264275372/5940019843"
-//        } else if colourScheme == "random" {
-//            
-//            //Random add UniID
-//            //adView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-//            adView.adUnitID = "ca-app-pub-6474009264275372/7416753049"
-//            
-//        }
-        //test add unitID
-        //adView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         adView.adUnitID = "ca-app-pub-6474009264275372/2467968649"
-        
-        
         adView.rootViewController = self
-        
+       
         if kidsModeOn == "on" {
             request.tag(forChildDirectedTreatment: true)
         } else  { request.tag(forChildDirectedTreatment: false)
@@ -111,24 +90,15 @@ class GameOverVC: UIViewController, GADInterstitialDelegate {
         }
         
         if colourScheme == "pink" {
-            topView.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-           // bottomView.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            newGameBtn.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            scoreView.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            messageLBL.textColor = UIColor(red: 0.5647, green: 0.7921, blue: 0.9765, alpha: 1.0)
+            mainColor = PINK_COLOR
+            updateColor()
             
         } else if colourScheme == "blue" {
-            topView.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-          //  bottomView.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            newGameBtn.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            scoreView.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            messageLBL.textColor = UIColor(red: 1.0, green: 0.502, blue: 0.051, alpha: 1.0 )
+            mainColor = BLUE_COLOR
+            updateColor()
         }  else if colourScheme == "random" {
-            scoreView.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            messageLBL.textColor = UIColor(red: 1.0, green: 0.502, blue: 0.051, alpha: 1.0 )
-            topView.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            newGameBtn.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0)
-       //     bottomView.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
+            mainColor = RANDOM_COLOR
+            updateColor()
             
         }
         
@@ -256,6 +226,13 @@ class GameOverVC: UIViewController, GADInterstitialDelegate {
         
         
         
+    }
+    
+    func updateColor() {
+    topView.backgroundColor = mainColor
+    newGameBtn.backgroundColor = mainColor
+    scoreView.backgroundColor = mainColor
+    messageLBL.textColor = mainColor
     }
     
     @IBAction func NewGameBtnPressed(_ sender: AnyObject) {

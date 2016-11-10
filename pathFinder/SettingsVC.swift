@@ -28,10 +28,12 @@ class SettingsVC: UIViewController {
     @IBOutlet weak var bottomBar: UIView!
     
     var kidsModeOn = "off"
-    var speed = Int()
+    var speed = String()
+    var personSpeed = Int()
     var colour = String()
     var colourScheme = String()
     var ad = GADBannerView()
+    var mainColor: UIColor!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,18 +56,18 @@ class SettingsVC: UIViewController {
             kidsBtn.isOn = false
         }
         
-        if diffChosen.integer(forKey: "startingSpeed") == 0 {
-            speed = -60
+        if diffChosen.string(forKey: "startingSpeed") == nil {
+            speed = "Slow"
             
         } else {
-            speed = diffChosen.integer(forKey: "startingSpeed")
+            speed = diffChosen.string(forKey: "startingSpeed")!
         }
       
-        if speed == -60 {
+        if speed == "Slow" {
             diffChoose.selectedSegmentIndex = 0
-        } else if speed == -80 {
+        } else if speed == "Hyper-Active" {
             diffChoose.selectedSegmentIndex = 1
-        } else if speed == -110 {
+        } else if speed == "Ludicrous" {
             diffChoose.selectedSegmentIndex = 2
         }
         
@@ -81,56 +83,25 @@ class SettingsVC: UIViewController {
         doneBtn.layer.shadowOffset = CGSize(width: 3.0, height: 3.0)
 
         if colourScheme == "pink" {
-            topBar.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            doneBtn.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            titleLbl.textColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            diffLbl.textColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            colourLbl.textColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            soundFXLbl.textColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            colourChoose.tintColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            diffChoose.tintColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            holdLbl.textColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            soundOff.onTintColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            bottomBar.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            kidsLbl.textColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            kidsBtn.onTintColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            kidsBtn.tintColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
+            mainColor = PINK_COLOR
+            colorChange()
             colourChoose.selectedSegmentIndex = 1
             
             
         } else if colourScheme == "blue" {
-            topBar.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            doneBtn.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            titleLbl.textColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            diffLbl.textColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            colourLbl.textColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            soundFXLbl.textColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            colourChoose.tintColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            diffChoose.tintColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            holdLbl.textColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            soundOff.onTintColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            bottomBar.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            kidsLbl.textColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            kidsBtn.onTintColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            kidsBtn.tintColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            
+            mainColor = BLUE_COLOR
+            colorChange()
             colourChoose.selectedSegmentIndex = 0
         
         }  else if colourScheme == "random" {
-            topBar.backgroundColor = UIColor(red: 1.0, green: 0.502, blue: 0.051, alpha: 1.0 )
-            doneBtn.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            titleLbl.textColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            diffLbl.textColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            colourLbl.textColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            soundFXLbl.textColor = UIColor(red: 1.0, green: 0.502, blue: 0.051, alpha: 1.0 )
-            colourChoose.tintColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            diffChoose.tintColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            holdLbl.textColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            soundOff.onTintColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            bottomBar.backgroundColor = UIColor(red: 1.0, green: 0.502, blue: 0.051, alpha: 1.0 )
-            kidsLbl.textColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            kidsBtn.onTintColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            kidsBtn.tintColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
+            
+            let red = CGFloat((arc4random()%10)+2)/12
+            let green = CGFloat((arc4random()%10)+2)/12
+            let blue = CGFloat((arc4random()%10)+2)/12
+            
+            mainColor = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
+            RANDOM_COLOR = mainColor
+            colorChange()
             colourChoose.selectedSegmentIndex = 2
 
         }
@@ -171,18 +142,35 @@ class SettingsVC: UIViewController {
     
     }
     
+    func colorChange() {
+        topBar.backgroundColor = mainColor
+        doneBtn.backgroundColor = mainColor
+        titleLbl.textColor = mainColor
+        diffLbl.textColor = mainColor
+        colourLbl.textColor = mainColor
+        soundFXLbl.textColor = mainColor
+        colourChoose.tintColor = mainColor
+        diffChoose.tintColor = mainColor
+        holdLbl.textColor = mainColor
+        soundOff.onTintColor = mainColor
+        bottomBar.backgroundColor = mainColor
+        kidsLbl.textColor = mainColor
+        kidsBtn.onTintColor = mainColor
+        kidsBtn.tintColor = mainColor
+    }
+    
     
     @IBAction func diffChooseBtn(_ sender: AnyObject) {
         
         let chosenDiff = UserDefaults.standard
         
         if diffChoose.selectedSegmentIndex == 0{
-            speed = -60
+            speed = "Slow"
             
         } else if diffChoose.selectedSegmentIndex == 1 {
-            speed = -80
+            speed = "Hyper-Active"
         } else if diffChoose.selectedSegmentIndex == 2 {
-            speed = -110
+            speed = "Ludicrous"
         }
         
         chosenDiff.set(speed, forKey: "startingSpeed")

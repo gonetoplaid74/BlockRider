@@ -16,6 +16,7 @@ class TitleScreenVC: UIViewController {
     
     @IBOutlet weak var titleImg: UIImageView!
     var colourScheme = String()
+    var mainColor = UIColor()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,23 +35,26 @@ class TitleScreenVC: UIViewController {
         }
         
         if colourScheme == "pink" {
-            startBtn.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            titleView.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            bottomBar.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
+            mainColor = PINK_COLOR
+            updateColor()
             titleImg.image = UIImage(named: "BRtitlepink")
             
         } else if colourScheme == "blue" {
-            startBtn.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            titleView.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            bottomBar.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
+            mainColor = BLUE_COLOR
+            updateColor()
             titleImg.image = UIImage(named: "BRtitle")
 
         } else if colourScheme == "random" {
-            bottomBar.backgroundColor = UIColor(red: 0.9137, green: 0.1176, blue: 0.3882, alpha: 1.0 )
-            titleView.backgroundColor = UIColor(red: 0.3764, green: 0.4902, blue: 0.5451, alpha: 1.0 )
-            startBtn.backgroundColor = UIColor(red: 1.0, green: 0.502, blue: 0.051, alpha: 1.0 )
-             titleImg.image = UIImage(named: "BRtitlerandom")
+            mainColor = RANDOM_COLOR
+            updateColor()
+            titleImg.image = UIImage(named: "BRtitlerandom")
             
     }
+    }
+    func updateColor() {
+        startBtn.backgroundColor = mainColor
+        titleView.backgroundColor = mainColor
+        bottomBar.backgroundColor = mainColor
+
     }
 }
