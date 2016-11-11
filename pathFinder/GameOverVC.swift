@@ -232,7 +232,7 @@ class GameOverVC: UIViewController, GADInterstitialDelegate {
     topView.backgroundColor = mainColor
     newGameBtn.backgroundColor = mainColor
     scoreView.backgroundColor = mainColor
-    messageLBL.textColor = mainColor
+    messageLBL.textColor = .white
     }
     
     @IBAction func NewGameBtnPressed(_ sender: AnyObject) {
