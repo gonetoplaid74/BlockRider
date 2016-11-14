@@ -46,7 +46,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
     var livesLbl = UILabel()
     var gameOverLabel = UILabel()
     var HSTable = UILabel()
-    var lives = 3
+    var lives = 2
     var gameButton = UIButton()
     var newGameButton = UIButton()
     var personColor = UIColor()
@@ -75,7 +75,13 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
     
     override func viewDidLoad() {
         
-        
+        let speedcheck = UserDefaults.standard
+        if speedcheck.string(forKey: "startingSpeed")! == "Slow" || speedcheck.string(forKey: "startingSpeed")! == "Hyper-Acive" || speedcheck.string(forKey: "startingSpeed")! == "Ludicrous" {
+            print("speedcheck =  \(speedcheck)")
+        } else {
+            speedcheck.set("Hyper-Active", forKey: "startingSpeed")
+            print("speedcheck is set to  = \(speedcheck)")
+        }
         loadUserData()
         authenticatePlayer()
         baseColourScheme()
@@ -181,7 +187,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         if savedStartSpeed.string(forKey: "startingSpeed") != nil {
             speedName = savedStartSpeed.string(forKey: "startingSpeed")!
         } else {
-            speedName = "Slow"
+            speedName = "Hyper-Active"
         }
         
         if savedColourScheme.string(forKey: "chosenColourScheme") == nil {
@@ -422,7 +428,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
     
         
         
-       if lives != 0{
+       if lives != -1{
         
         let sequence = SCNAction.sequence([wait, SCNAction.run({
             node in
@@ -720,7 +726,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
             highscore = 0
         }
         gameOver = false
-        lives = 3
+        lives = 2
         boxNumber = 0
         score = 0
         prevBoxNumber = 0
