@@ -25,6 +25,9 @@
 		C2B6E2811D941E1700EC0A2C /* coin.aiff in Resources */ = {isa = PBXBuildFile; fileRef = C2B6E2801D941E1700EC0A2C /* coin.aiff */; };
 		C2D052671D9282580046D17E /* MaterialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D052661D9282580046D17E /* MaterialButton.swift */; };
 		C2D052691D92826C0046D17E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D052681D92826C0046D17E /* Constants.swift */; };
+		C2EDCC891DDA0D25007CBFC8 /* green.dae in Resources */ = {isa = PBXBuildFile; fileRef = C2EDCC881DDA0D25007CBFC8 /* green.dae */; };
+		C2EDCC8E1DDA2551007CBFC8 /* blue.dae in Resources */ = {isa = PBXBuildFile; fileRef = C2EDCC8D1DDA2551007CBFC8 /* blue.dae */; };
+		C2EDCC911DDA26D9007CBFC8 /* pink.dae in Resources */ = {isa = PBXBuildFile; fileRef = C2EDCC901DDA26D9007CBFC8 /* pink.dae */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +74,10 @@
 		C2B6E2801D941E1700EC0A2C /* coin.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = coin.aiff; sourceTree = "<group>"; };
 		C2D052661D9282580046D17E /* MaterialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialButton.swift; sourceTree = "<group>"; };
 		C2D052681D92826C0046D17E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C2EDCC881DDA0D25007CBFC8 /* green.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = green.dae; sourceTree = "<group>"; };
+		C2EDCC8C1DDA1614007CBFC8 /* pathFinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pathFinder.entitlements; sourceTree = "<group>"; };
+		C2EDCC8D1DDA2551007CBFC8 /* blue.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = blue.dae; sourceTree = "<group>"; };
+		C2EDCC901DDA26D9007CBFC8 /* pink.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = pink.dae; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,11 +131,15 @@
 		166F96F11D4E0DDA003DE668 /* pathFinder */ = {
 			isa = PBXGroup;
 			children = (
+				C2EDCC8C1DDA1614007CBFC8 /* pathFinder.entitlements */,
 				C2106E181D9D46A7007E45CE /* GoogleService-Info.plist */,
 				166F96F21D4E0DDA003DE668 /* AppDelegate.swift */,
 				166F97241D4E0F03003DE668 /* Coin.dae */,
 				C2B6E27E1D941D2F00EC0A2C /* coins.wav */,
 				166F97221D4E0EF4003DE668 /* coin.wav */,
+				C2EDCC8D1DDA2551007CBFC8 /* blue.dae */,
+				C2EDCC901DDA26D9007CBFC8 /* pink.dae */,
+				C2EDCC881DDA0D25007CBFC8 /* green.dae */,
 				C2B6E2801D941E1700EC0A2C /* coin.aiff */,
 				166F96F61D4E0DDA003DE668 /* GameViewController.swift */,
 				C217EEB71D90FCF4007775B9 /* Main.storyboard */,
@@ -252,6 +263,11 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = MNM3C2L7P4;
 						LastSwiftMigration = 0800;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 					166F97041D4E0DDA003DE668 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -292,11 +308,14 @@
 			files = (
 				166F97231D4E0EF4003DE668 /* coin.wav in Resources */,
 				C2106E191D9D46A7007E45CE /* GoogleService-Info.plist in Resources */,
+				C2EDCC8E1DDA2551007CBFC8 /* blue.dae in Resources */,
 				166F97251D4E0F03003DE668 /* Coin.dae in Resources */,
+				C2EDCC891DDA0D25007CBFC8 /* green.dae in Resources */,
 				C217EEB81D90FCF4007775B9 /* Main.storyboard in Resources */,
 				C2B6E27F1D941D2F00EC0A2C /* coins.wav in Resources */,
 				C2B6E2811D941E1700EC0A2C /* coin.aiff in Resources */,
 				166F96FF1D4E0DDA003DE668 /* LaunchScreen.storyboard in Resources */,
+				C2EDCC911DDA26D9007CBFC8 /* pink.dae in Resources */,
 				166F96FC1D4E0DDA003DE668 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

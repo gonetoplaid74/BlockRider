@@ -18,7 +18,7 @@ import GoogleMobileAds
 struct bodyNames {
     static let Person = 0x1 << 1
     static let Coin = 0x1 << 2
-    //static let bonus1 = 0x1 << 4
+    static let Bonus = 0x1 << 4
     
 }
 
@@ -67,6 +67,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
     var speedName = String()
     var colourSchemeColour = UIColor()
     var kidsModeOn = String()
+    var currentBonus = String()
     var adView: GADBannerView!
     
     var newHighScore = false
@@ -127,10 +128,33 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
             }
             //coinSound.play()
             
-        }
+        } else if nodeA.physicsBody?.categoryBitMask == bodyNames.Person && nodeB.physicsBody?.categoryBitMask == bodyNames.Bonus{
+            nodeB.removeFromParentNode()
+            print(" Yay a bonus!")
+            bonusAction()
+        } else if nodeA.physicsBody?.categoryBitMask == bodyNames.Bonus && nodeB.physicsBody?.categoryBitMask == bodyNames.Person{
+            nodeA.removeFromParentNode()
+            print("Yay a bonus!")
+            bonusAction()
         
      
            
+    }
+    }
+    
+    func bonusAction() {
+        
+        if currentBonus == "Green" {
+        speed += 10
+        
+        print("\(speed)")
+        } else if currentBonus == "Pink" {
+            lives += 1
+        } else if currentBonus == "Blue" {
+            for _ in 0...100{
+            addScore()
+        }
+        }
     }
 
     func Action(_ sender: UIButton!){
@@ -324,6 +348,31 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         
     }
     
+//    func createBonus(_ box : SCNNode) {
+//        scene.physicsWorld.gravity = SCNVector3Make(0, 0, 0)
+//        let spin2 = SCNAction.rotate(by: CGFloat(M_PI * 2), around: SCNVector3Make(0, 0.5 , 0) , duration: 0.75)
+//        var bonusFreq = UInt32()
+//        bonusFreq = 2
+//        
+//        let randomNuber = arc4random() % bonusFreq
+//        if randomNuber == 1 {
+//            let bonusScene = SCNScene(named: "green.dae")
+//            let bonus = bonusScene?.rootNode.childNode(withName: "green", recursively: true)
+//            bonus?.position = SCNVector3Make(box.position.x, box.position.y + 1, box.position.z)
+//            bonus?.scale = SCNVector3Make(0.3, 0.3, 0.3)
+//            
+//            bonus?.physicsBody = SCNPhysicsBody(type: SCNPhysicsBodyType.dynamic, shape: SCNPhysicsShape(node: bonus!, options: nil))
+//            bonus?.physicsBody?.categoryBitMask = bodyNames.Bonus
+//            bonus?.physicsBody?.contactTestBitMask = bodyNames.Person
+//            bonus?.physicsBody?.collisionBitMask = bodyNames.Person
+//            bonus?.physicsBody?.isAffectedByGravity = false
+//            
+//            scene.rootNode.addChildNode(bonus!)
+//            bonus?.runAction(SCNAction.repeatForever(spin2))
+//            fadeIn(bonus!)
+//            
+//        }
+//    }
     
     func createCoin(_ box : SCNNode){
         scene.physicsWorld.gravity = SCNVector3Make(0, 0, 0)
@@ -336,6 +385,45 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         } else if speedName == "Ludicrous" {
             coinFreq = 3
         }
+        
+        let bonusNumber = arc4random() % 30
+        let bonusRandom = arc4random() % 3
+        var bonusSpinner = String()
+        var bonusName = String()
+        
+        if bonusRandom == 0 {
+            bonusSpinner = "pink.dae"
+            bonusName = "pink"
+            currentBonus = "Pink"
+        
+        } else if bonusRandom == 1 {
+            bonusSpinner = "blue.dae"
+            bonusName = "blue"
+            currentBonus = "Blue"
+            
+        } else if bonusRandom == 2 {
+            bonusSpinner = "green.dae"
+            bonusName = "green"
+            currentBonus = "Green"
+        }
+        
+        if bonusNumber == 2 {
+            let bonusScene = SCNScene(named: bonusSpinner)
+            let bonus = bonusScene?.rootNode.childNode(withName: bonusName, recursively: true)
+            bonus?.position = SCNVector3Make(box.position.x, box.position.y + 1, box.position.z)
+            bonus?.scale = SCNVector3Make(0.3, 0.3, 0.3)
+            
+            bonus?.physicsBody = SCNPhysicsBody(type: SCNPhysicsBodyType.dynamic, shape: SCNPhysicsShape(node: bonus!, options: nil))
+            bonus?.physicsBody?.categoryBitMask = bodyNames.Bonus
+            bonus?.physicsBody?.contactTestBitMask = bodyNames.Person
+            bonus?.physicsBody?.collisionBitMask = bodyNames.Person
+            bonus?.physicsBody?.isAffectedByGravity = false
+            
+            scene.rootNode.addChildNode(bonus!)
+            bonus?.runAction(SCNAction.repeatForever(spin))
+            fadeIn(bonus!)
+
+        } else {
         
         let randomNumber = arc4random() % coinFreq
         if randomNumber == 1{
@@ -357,7 +445,7 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         
             fadeIn(coin!)
             
-            
+            }
             
         }
         
@@ -658,7 +746,8 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
             break
         }
         self.scene.rootNode.addChildNode(tempBox)
-        createCoin(tempBox)
+       createCoin(tempBox)
+      // createBonus(tempBox)
         fadeIn(tempBox)
        // playSound()
     
@@ -786,8 +875,8 @@ class GameViewController: UIViewController, SCNSceneRendererDelegate, SCNPhysics
         
         person.physicsBody = SCNPhysicsBody(type: SCNPhysicsBodyType.static, shape:SCNPhysicsShape(node: person, options: nil))
         person.physicsBody?.categoryBitMask = bodyNames.Person
-        person.physicsBody?.collisionBitMask = bodyNames.Coin
-        person.physicsBody?.contactTestBitMask = bodyNames.Coin
+        person.physicsBody?.collisionBitMask = bodyNames.Bonus
+        person.physicsBody?.contactTestBitMask = bodyNames.Bonus
         person.physicsBody?.isAffectedByGravity = false
         
         
