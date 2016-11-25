@@ -23,13 +23,15 @@ class SettingsVC: UIViewController {
     
     @IBOutlet weak var kidsBtn: UISwitch!
     @IBOutlet weak var kidsLbl: UILabel!
-    @IBOutlet weak var holdLbl: UILabel!
+ 
     @IBOutlet weak var soundOff: UISwitch!
     @IBOutlet weak var bottomBar: UIView!
+    @IBOutlet weak var musicOff: UISwitch!
     
-    var kidsModeOn = "off"
+    
     var speed = String()
     var personSpeed = Int()
+    @IBOutlet weak var musicLBL: UILabel!
     var colour = String()
     var colourScheme = String()
     var ad = GADBannerView()
@@ -43,18 +45,47 @@ class SettingsVC: UIViewController {
         let colourSchemeChoice = UserDefaults.standard
         let diffChosen = UserDefaults.standard
         let kidsMode = UserDefaults.standard
+        let soundMode = UserDefaults.standard
+        let musicMode = UserDefaults.standard
         
-        if kidsMode.string(forKey: "kidsMode") == nil {
-            kidsBtn.isOn = false
+        if kidsMode.bool(forKey: "kidsMode") == false || kidsMode.bool(forKey: "kidsMode") == true {
+            kidsBtn.isOn = kidsMode.bool(forKey: "kidsMode")
+            
+            
         } else {
+        kidsMode.set(false, forKey: "kidsMode")
+        kidsBtn.isOn = false
+            
+            
         
-        kidsModeOn = kidsMode.object(forKey: "kidsMode") as! String
         }
-        if kidsModeOn == "on" {
-            kidsBtn.isOn = true
+        if soundMode.string(forKey: "soundMode") == nil {
+            soundMode.set(true, forKey: "soundMode")
+        }
+        
+        if soundMode.bool(forKey: "soundMode") == true || soundMode.bool(forKey: "soundMode") == false {
+            soundOff.isOn = soundMode.bool(forKey: "soundMode")
+            
         } else {
-            kidsBtn.isOn = false
+            soundMode.set(true, forKey: "soundMode")
+            soundOff.isOn = true
         }
+        if musicMode.string(forKey: "musicMode") == nil {
+            musicMode.set(true, forKey: "musicMode")
+        }
+
+        
+        if musicMode.bool(forKey: "musicMode") == true || musicMode.bool(forKey: "musicMode") == false {
+            musicOff.isOn = musicMode.bool(forKey: "musicMode")
+            
+        } else {
+            musicMode.set(true, forKey: "musicMode")
+            musicOff.isOn = true
+            }
+        
+      
+        
+        
         
         if diffChosen.string(forKey: "startingSpeed") == nil {
             speed = "Slow"
@@ -151,8 +182,12 @@ class SettingsVC: UIViewController {
         soundFXLbl.textColor = mainColor
         colourChoose.tintColor = mainColor
         diffChoose.tintColor = mainColor
-        holdLbl.textColor = mainColor
+        musicLBL.textColor = mainColor
+        musicOff.tintColor = mainColor
+        musicOff.onTintColor = mainColor
+       
         soundOff.onTintColor = mainColor
+        soundOff.tintColor = mainColor
         bottomBar.backgroundColor = mainColor
         kidsLbl.textColor = mainColor
         kidsBtn.onTintColor = mainColor
@@ -183,18 +218,42 @@ class SettingsVC: UIViewController {
         
         
         if kidsBtn.isOn == true {
-            kidsModeOn = "on"
+            kidsMode.set(true, forKey: "kidsMode")
         } else {
-            kidsModeOn = "off"
+            kidsMode.set(false, forKey: "kidsMode")
         }
         
-        kidsMode.set(kidsModeOn, forKey: "kidsMode")
+       
+    }
+        
+        
+        
     
+    
+    @IBAction func musicSlider(_ sender: Any) {
+        let musicMode = UserDefaults.standard
         
-        
+        if musicOff.isOn == true {
+            musicMode.set(true, forKey: "musicMode")
+        } else  {
+            musicMode.set(false, forKey: "musicMode")
+        }
+
         
     }
     
+    
+    @IBAction func sounfFXSlider(_ sender: Any) {
+        
+        let soundMode = UserDefaults.standard
+        
+        if soundOff.isOn == true {
+            soundMode.set(true, forKey: "soundMode")
+        } else  {
+            soundMode.set(false, forKey: "soundMode")
+        }
+        
+    }
     
 
 

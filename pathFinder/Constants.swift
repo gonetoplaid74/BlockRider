@@ -22,3 +22,4 @@ var randCol = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
 var RANDOM_COLOR = randCol
 
 
+

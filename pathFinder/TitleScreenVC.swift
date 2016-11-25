@@ -20,6 +20,9 @@ class TitleScreenVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+      
+
     
         startBtn.layer.cornerRadius = 6.0
         startBtn.layer.shadowRadius = 6.0
@@ -50,6 +53,8 @@ class TitleScreenVC: UIViewController {
             titleImg.image = UIImage(named: "BRtitlerandom")
             
     }
+       
+        
     }
     func updateColor() {
         startBtn.backgroundColor = mainColor
